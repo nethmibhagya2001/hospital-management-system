@@ -1,0 +1,14 @@
+package com.example.hospitalmanager.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record MedicalRecordRequest(
+        @NotBlank String patientId,
+        String appointmentId,
+        @NotBlank String doctorName,
+        @NotBlank @Size(max = 1000) String diagnosis,
+        @NotBlank @Size(max = 2000) String treatment,
+        @Size(max = 5000) String notes
+) {
+}
