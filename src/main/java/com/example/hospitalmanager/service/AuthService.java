@@ -75,8 +75,9 @@ public class AuthService {
         AppUser user = userRepository.findByUsername(request.username())
                 .orElseThrow(() -> new ApiException(
                         HttpStatus.UNAUTHORIZED, "Invalid username or password"));
-        String token = jwtService.generateToken(user.getUsername());
         Role role = user.getRole();
+        String token = jwtService.generateToken(
+                user.getUsername(), role != null ? role.name() : null);
         return new AuthResponse(token, "Bearer", jwtService.getExpirationMs(), role);
     }
 
